@@ -1,0 +1,27 @@
+1) Contare quanti iscritti ci sono stati ogni anno
+SELECT YEAR(`enrolment_date`) AS `year`, COUNT(*) AS `students_amount`
+FROM `students`
+GROUP BY YEAR(`enrolment_date`);
+
+
+2) Contare gli insegnanti che hanno l'ufficio nello stesso edificio
+SELECT `office_address` AS `office`, COUNT(*) AS `teachers_amount`
+FROM `teachers`
+GROUP BY `office_address`;
+
+
+3) Calcolare la media dei voti di ogni appello di esame
+(Uso il ROUND per avere solo 2 decimali e metto anche la data esame per non mettere l'id)
+SELECT `exams`.`date` AS `exam_date`, ROUND(AVG(`exam_student`.`vote`),2) AS `exam_average`
+FROM `exam_student`
+JOIN `exams`
+ON `exam_student`.`exam_id` = `exams`.`id`
+GROUP BY `exam_id`;
+
+
+4) Contare quanti corsi di laurea ci sono per ogni dipartimento
+SELECT `departments`.`name` AS `department_name`, COUNT(*) AS `degrees_amount`
+FROM `degrees`
+JOIN `departments`
+ON `degrees`.`department_id` = `departments`.`id`
+GROUP BY `department_id`;
